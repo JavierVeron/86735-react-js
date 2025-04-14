@@ -1,10 +1,16 @@
-import ItemCount from "./ItemCount"
 import productos from "../assets/productos.json"
 import { useEffect, useState } from "react"
 import ItemList from "./ItemList";
+import McDonalds from "./McDonalds";
+import Banners from "../Clase3/Banners";
+import Servicio from "../Clase3/Servicio";
+import PedirPorApp from "../Clase3/PedirPorApp";
+import Registrate from "../Clase3/Registrate";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
     const [items, setItems] = useState([]);
+    const {id} = useParams();
 
     const promesa = new Promise((resolve) => {
         setTimeout(() => {
@@ -14,17 +20,19 @@ const ItemListContainer = () => {
 
     useEffect(() => {
         promesa.then(resultado => {
-            setItems(resultado);
+            setItems(id ? resultado.filter(item => item.category == id) : resultado);
         })
-    }, [])
+    }, [id])
 
     return (
-        <div className="container my-5">
-            <div className="row">
-                <ItemList items={items} />
-                <ItemCount stock={10} />
-            </div>
-        </div>
+        <>
+            {!id ? <><McDonalds />
+            <Banners />
+            <Servicio />
+            <PedirPorApp />
+            <Registrate /></> : ""}
+            <ItemList items={items} />
+        </>
     )
 }
 
