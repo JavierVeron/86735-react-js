@@ -6,7 +6,7 @@ const Select = ({option, options, optionSelected}) => {
         {
             options.map(item => (
                 <div key={item.id} className="form-check">
-                    <input type="radio" name="color" className="form-check-input" value={item.id} checked={option == item.value ? "checked" : ""} onChange={(e => {optionSelected(e.target.value)})} />
+                    <input type="radio" name="color" className="form-check-input" id={item.id} value={item.id} checked={option === item.id} onChange={() => {optionSelected(item.id)}} />
                     <label className="form-check-label">{item.texto}</label>
                 </div>
             ))
