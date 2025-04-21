@@ -5,29 +5,67 @@ import Footer from './components/Footer';
 import Familia from "./components/Familia";
 import Productos from "./components/Productos";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-import Eventos from "./Clase10/Eventos";
-import ItemDetail from "./Clase10/Intercambiabilidad";
-import Abstraccion1 from "./Clase10/Abstraccion1";
-import Abstraccion2 from "./Clase10/Abstraccion2";
+//import ComponenteA from "./Clase11/ComponenteA";
+import { createContext, useContext, useState } from "react";
+import ThemeContextProvider from "./components/context/ThemeContext";
+import CartContextProvider from "./components/context/CartContext";
+import Cart from "./components/Cart";
 
-function App() {
+//const ThemeContext = createContext(true);
+
+/* const ComponenteB = () => {
+  const {isDarkMode} = useContext(ThemeContext);
+  //console.log(isDarkMode);
+
   return (
     <>
-      {/* <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path={'/'} element={<ItemListContainer />} />
-          <Route path={'/productos'} element={<Productos />} />
-          <Route path={'/familia'} element={<Familia />} />
-          <Route path={'/category/:id'} element={<ItemListContainer />} />
-          <Route path={'/item/:id'} element={<ItemDetailContainer />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter> */}
-      {/* <Eventos /> */}
-      {/* <ItemDetail item={{id:1, nombre:"Coca Cola", precio:2000, quantity:5, stock:10}} inputType="input" /> */}
-      {/* <Abstraccion1 /> */}
-      <Abstraccion2 />
+      <p className="p-1">Modo Oscuro? <b>{isDarkMode ? "Sí" : "No"}</b></p>
+    </>
+  )
+} */
+
+/* const ComponenteA = () => {
+  const {curso, setCurso} = useContext(ThemeContext);
+
+  return <>
+    <p className="p-1">Curso: <b>{curso}</b></p>
+    <p className="p-1"><button className="btn btn-primary" onClick={() => {setCurso("React JS")}}>Modificar Curso</button></p>
+    </>
+} */
+
+function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [curso, setCurso] = useState("Desarrollo Web");
+
+  return (
+    <>
+      <CartContextProvider>
+        <ThemeContextProvider>
+          <BrowserRouter>
+            <NavBar />
+            <Routes>
+              <Route path={'/'} element={<ItemListContainer />} />
+              <Route path={'/productos'} element={<Productos />} />
+              <Route path={'/familia'} element={<Familia />} />
+              <Route path={'/category/:id'} element={<ItemListContainer />} />
+              <Route path={'/item/:id'} element={<ItemDetailContainer />} />
+              <Route path={'/cart'} element={<Cart />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+
+          {/* <ThemeContext.Provider value={{isDarkMode, curso, setCurso}}>
+            <ComponenteA />
+            <ComponenteB />
+          </ThemeContext.Provider> */}
+
+          {/* <ThemeContext.Consumer>
+            {(isDarkMode) => (
+              <p className="p-1">Modo Oscuro? <b>{isDarkMode ? "Sí" : "No"}</b></p>
+            )}
+          </ThemeContext.Consumer> */}
+        </ThemeContextProvider>
+      </CartContextProvider>
     </>
   )
 }
