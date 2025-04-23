@@ -7,8 +7,10 @@ import Servicio from "../Clase3/Servicio";
 import PedirPorApp from "../Clase3/PedirPorApp";
 import Registrate from "../Clase3/Registrate";
 import { useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const ItemListContainer = () => {
+    const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     const {id} = useParams();
 
@@ -21,6 +23,7 @@ const ItemListContainer = () => {
     useEffect(() => {
         promesa.then(resultado => {
             setItems(id ? resultado.filter(item => item.category == id) : resultado);
+            setLoading(false);
         })
     }, [id])
 
@@ -31,7 +34,7 @@ const ItemListContainer = () => {
             <Servicio />
             <PedirPorApp />
             <Registrate /></> : ""}
-            <ItemList items={items} />
+            {loading ? <Loading /> : <ItemList items={items} />}
         </>
     )
 }

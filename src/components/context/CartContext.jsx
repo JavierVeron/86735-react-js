@@ -33,7 +33,32 @@ const CartContextProvider = ({children}) => {
         return cart.some(item => item.id == id);
     }
 
-    return <CartContext.Provider value={{cart, addItem, removeItem, clear}}>
+    const totalProductos = () => {
+        return cart.reduce((acum, item) => acum += item.quantity, 0);
+    }
+
+    const sumaProductos = () => {
+        return cart.reduce((acum, item) => acum += item.price * item.quantity, 0);
+    }
+
+    const decrementarItem = (id) => {
+        let product = cart.find(prod => prod.id == id);
+
+        if (product.quantity > 1) {
+            product.quantity -= 1;
+            setCart([...cart]);
+        } else {
+            removeItem(id);
+        }
+    }
+
+    const aumentarItem = (id) => {
+        let product = cart.find(prod => prod.id == id);
+        product.quantity += 1;
+        setCart([...cart]);
+    }
+
+    return <CartContext.Provider value={{cart, addItem, removeItem, clear, totalProductos, sumaProductos, decrementarItem, aumentarItem}}>
         {children}
     </CartContext.Provider>
 }

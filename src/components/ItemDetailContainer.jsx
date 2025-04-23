@@ -3,8 +3,10 @@ import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { CartContext } from "./context/CartContext";
+import Loading from "./Loading";
 
 const ItemDetailContainer = () => {
+    const [loading, setLoading] = useState(true);
     const [item, setItem] = useState({});
     const {id} = useParams();
     const [visible, setVisible] = useState(true);
@@ -19,6 +21,7 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         promesa.then(resultado => {
             setItem(resultado.find(item => item.id == id));
+            setLoading(false);
         })
     }, [id])
 
@@ -26,6 +29,12 @@ const ItemDetailContainer = () => {
         console.log("Agregaste " + quantity + " Producto(s) al Carrito!");        
         addItem(item, quantity);
         setVisible(false);
+    }
+
+    if (loading) {
+        return (
+            <Loading />
+        )
     }
 
     return (

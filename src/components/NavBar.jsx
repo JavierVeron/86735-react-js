@@ -33,7 +33,7 @@ const NavBar = () => {
                             </li>
                         </ul>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" onChange={() => {setIsDarkMode(isDarkMode ? false : true)}} />
+                            <input className="form-check-input" type="checkbox" role="switch" onChange={() => {setIsDarkMode(isDarkMode ? false : true)}} checked={isDarkMode ? "checked" : ""} />
                             <label className={`form-check-label ${isDarkMode ? "text-dark" : "text-white"}`}>Modo Oscuro</label>
                         </div>
                     </div>

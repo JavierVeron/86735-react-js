@@ -5,37 +5,16 @@ import Footer from './components/Footer';
 import Familia from "./components/Familia";
 import Productos from "./components/Productos";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-//import ComponenteA from "./Clase11/ComponenteA";
-import { createContext, useContext, useState } from "react";
 import ThemeContextProvider from "./components/context/ThemeContext";
 import CartContextProvider from "./components/context/CartContext";
 import Cart from "./components/Cart";
-
-//const ThemeContext = createContext(true);
-
-/* const ComponenteB = () => {
-  const {isDarkMode} = useContext(ThemeContext);
-  //console.log(isDarkMode);
-
-  return (
-    <>
-      <p className="p-1">Modo Oscuro? <b>{isDarkMode ? "Sí" : "No"}</b></p>
-    </>
-  )
-} */
-
-/* const ComponenteA = () => {
-  const {curso, setCurso} = useContext(ThemeContext);
-
-  return <>
-    <p className="p-1">Curso: <b>{curso}</b></p>
-    <p className="p-1"><button className="btn btn-primary" onClick={() => {setCurso("React JS")}}>Modificar Curso</button></p>
-    </>
-} */
+import Rendering2 from "./Clase12/Rendering2";
+import Loading from "./components/Loading";
+import Rendering3 from "./Clase12/Rendering3";
+import Memo from "./Clase12/Memo";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [curso, setCurso] = useState("Desarrollo Web");
+  /* const producto = {"id":8, "title":"Coca Cola Grande", "description":"Burbujas contra el calor, contra la sed, contra el aburrimiento. Si tus comidas llevan gaseosa, están listas para enfrentar lo que sea, elegila en tamaño regular, mediano o grande.", "price":9000, "image":"https://cache-mcd-middleware.mcdonaldscupones.com/media/image/product$kcXf3XY0/200/200/original?country=ar", "category":"bebidas", "stock":10, fechaModificacion:"24-04-2025"} */
 
   return (
     <>
@@ -54,16 +33,8 @@ function App() {
             <Footer />
           </BrowserRouter>
 
-          {/* <ThemeContext.Provider value={{isDarkMode, curso, setCurso}}>
-            <ComponenteA />
-            <ComponenteB />
-          </ThemeContext.Provider> */}
-
-          {/* <ThemeContext.Consumer>
-            {(isDarkMode) => (
-              <p className="p-1">Modo Oscuro? <b>{isDarkMode ? "Sí" : "No"}</b></p>
-            )}
-          </ThemeContext.Consumer> */}
+          {/* <Rendering3 modoDark={true} clase={""}  /> */}
+          {/* <Memo item={producto} /> */}
         </ThemeContextProvider>
       </CartContextProvider>
     </>
