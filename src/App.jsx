@@ -8,10 +8,9 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import ThemeContextProvider from "./components/context/ThemeContext";
 import CartContextProvider from "./components/context/CartContext";
 import Cart from "./components/Cart";
-import Rendering2 from "./Clase12/Rendering2";
 import Loading from "./components/Loading";
-import Rendering3 from "./Clase12/Rendering3";
-import Memo from "./Clase12/Memo";
+import FirebaseDoc from "./Clase13/FirebaseDoc";
+import FirebaseCollection from "./Clase13/FirebaseCollection";
 
 function App() {
   /* const producto = {"id":8, "title":"Coca Cola Grande", "description":"Burbujas contra el calor, contra la sed, contra el aburrimiento. Si tus comidas llevan gaseosa, están listas para enfrentar lo que sea, elegila en tamaño regular, mediano o grande.", "price":9000, "image":"https://cache-mcd-middleware.mcdonaldscupones.com/media/image/product$kcXf3XY0/200/200/original?country=ar", "category":"bebidas", "stock":10, fechaModificacion:"24-04-2025"} */
@@ -33,8 +32,8 @@ function App() {
             <Footer />
           </BrowserRouter>
 
-          {/* <Rendering3 modoDark={true} clase={""}  /> */}
-          {/* <Memo item={producto} /> */}
+          {/* <FirebaseDoc /> */}
+          {/* <FirebaseCollection /> */}
         </ThemeContextProvider>
       </CartContextProvider>
     </>

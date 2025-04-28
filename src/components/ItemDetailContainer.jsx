@@ -1,9 +1,9 @@
-import productos from "../assets/productos.json"
 import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { CartContext } from "./context/CartContext";
 import Loading from "./Loading";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true);
@@ -12,16 +12,17 @@ const ItemDetailContainer = () => {
     const [visible, setVisible] = useState(true);
     const {addItem} = useContext(CartContext);
 
-    const promesa = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(productos);
-        }, 3000)
-    })
-
     useEffect(() => {
-        promesa.then(resultado => {
-            setItem(resultado.find(item => item.id == id));
-            setLoading(false);
+        const db = getFirestore();
+        const docRef = doc(db, "items", id);
+        getDoc(docRef)
+        .then(snapShot => {
+            if (snapShot.exists()) {
+                setItem({id:snapShot.id, ...snapShot.data()});
+                setLoading(false);
+            } else {
+                console.log("El Documento no existe!");
+            }
         })
     }, [id])
 

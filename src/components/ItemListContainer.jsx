@@ -1,4 +1,3 @@
-import productos from "../assets/productos.json"
 import { useEffect, useState } from "react"
 import ItemList from "./ItemList";
 import McDonalds from "./McDonalds";
@@ -8,22 +7,25 @@ import PedirPorApp from "../Clase3/PedirPorApp";
 import Registrate from "../Clase3/Registrate";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const ItemListContainer = () => {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     const {id} = useParams();
 
-    const promesa = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(productos);
-        }, 3000)
-    })
-
     useEffect(() => {
-        promesa.then(resultado => {
-            setItems(id ? resultado.filter(item => item.category == id) : resultado);
-            setLoading(false);
+        const db = getFirestore();
+        const itemsCollection = collection(db, "items");
+        const q = id ? query(itemsCollection, (where("categoria", "==", id))) : itemsCollection;
+        getDocs(q)
+        .then(snapShot => {
+            if (snapShot.size > 0) {
+                setItems(snapShot.docs.map(item => ({id:item.id, ...item.data()})));
+                setLoading(false);
+            } else {
+                console.log("No hay Documentos!");
+            }
         })
     }, [id])
 
