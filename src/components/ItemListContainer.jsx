@@ -7,7 +7,7 @@ import PedirPorApp from "../Clase3/PedirPorApp";
 import Registrate from "../Clase3/Registrate";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
     const [loading, setLoading] = useState(true);
@@ -16,8 +16,8 @@ const ItemListContainer = () => {
 
     useEffect(() => {
         const db = getFirestore();
-        const itemsCollection = collection(db, "items");
-        const q = id ? query(itemsCollection, (where("categoria", "==", id))) : itemsCollection;
+        const itemsCollection = collection(db, "items");        
+        const q = id ? query(itemsCollection, (where("category", "==", id))) : itemsCollection;
         getDocs(q)
         .then(snapShot => {
             if (snapShot.size > 0) {

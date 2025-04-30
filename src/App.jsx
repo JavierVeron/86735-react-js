@@ -8,13 +8,9 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import ThemeContextProvider from "./components/context/ThemeContext";
 import CartContextProvider from "./components/context/CartContext";
 import Cart from "./components/Cart";
-import Loading from "./components/Loading";
-import FirebaseDoc from "./Clase13/FirebaseDoc";
-import FirebaseCollection from "./Clase13/FirebaseCollection";
+import Checkout from "./components/Checkout";
 
 function App() {
-  /* const producto = {"id":8, "title":"Coca Cola Grande", "description":"Burbujas contra el calor, contra la sed, contra el aburrimiento. Si tus comidas llevan gaseosa, están listas para enfrentar lo que sea, elegila en tamaño regular, mediano o grande.", "price":9000, "image":"https://cache-mcd-middleware.mcdonaldscupones.com/media/image/product$kcXf3XY0/200/200/original?country=ar", "category":"bebidas", "stock":10, fechaModificacion:"24-04-2025"} */
-
   return (
     <>
       <CartContextProvider>
@@ -28,12 +24,10 @@ function App() {
               <Route path={'/category/:id'} element={<ItemListContainer />} />
               <Route path={'/item/:id'} element={<ItemDetailContainer />} />
               <Route path={'/cart'} element={<Cart />} />
+              <Route path={'/checkout'} element={<Checkout />} />
             </Routes>
             <Footer />
           </BrowserRouter>
-
-          {/* <FirebaseDoc /> */}
-          {/* <FirebaseCollection /> */}
         </ThemeContextProvider>
       </CartContextProvider>
     </>

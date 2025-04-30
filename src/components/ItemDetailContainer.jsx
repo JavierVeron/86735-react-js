@@ -12,11 +12,11 @@ const ItemDetailContainer = () => {
     const [visible, setVisible] = useState(true);
     const {addItem} = useContext(CartContext);
 
-    useEffect(() => {
+    useEffect(() => {        
         const db = getFirestore();
         const docRef = doc(db, "items", id);
         getDoc(docRef)
-        .then(snapShot => {
+        .then(snapShot => {            
             if (snapShot.exists()) {
                 setItem({id:snapShot.id, ...snapShot.data()});
                 setLoading(false);
@@ -49,7 +49,7 @@ const ItemDetailContainer = () => {
                         <h1 className="fw-bold">{item.title}</h1>
                         <p>{item.description}</p>
                         <p className="fw-bold">${item.price}</p>
-                        {visible ? <ItemCount stock={item.stock} onAdd={onAdd} /> : <Link to={"/cart"} className="btn btn-warning fw-bold">Terminar Mi Compra</Link>}
+                        {visible ? item.stock > 0 ? <ItemCount stock={item.stock} onAdd={onAdd} /> : <span className="badge text-bg-warning">Sin Stock</span> : <Link to={"/cart"} className="btn btn-warning fw-bold">Terminar Mi Compra</Link>}
                     </div>
                 </div>
             </div>
