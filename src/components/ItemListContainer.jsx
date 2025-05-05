@@ -8,6 +8,7 @@ import Registrate from "../Clase3/Registrate";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import Error404 from "./Error404";
 
 const ItemListContainer = () => {
     const [loading, setLoading] = useState(true);
@@ -20,14 +21,25 @@ const ItemListContainer = () => {
         const q = id ? query(itemsCollection, (where("category", "==", id))) : itemsCollection;
         getDocs(q)
         .then(snapShot => {
+            setLoading(false);
+
             if (snapShot.size > 0) {
                 setItems(snapShot.docs.map(item => ({id:item.id, ...item.data()})));
-                setLoading(false);
-            } else {
-                console.log("No hay Documentos!");
             }
         })
     }, [id])
+
+    if (loading) {
+        return (
+            <Loading />
+        )
+    }
+
+    if (items.length == 0) {
+        return (
+            <Error404 mensaje={"No hay Productos para esta Categoría!"} />
+        )
+    }
 
     return (
         <>
@@ -36,7 +48,7 @@ const ItemListContainer = () => {
             <Servicio />
             <PedirPorApp />
             <Registrate /></> : ""}
-            {loading ? <Loading /> : <ItemList items={items} />}
+            <ItemList items={items} />
         </>
     )
 }

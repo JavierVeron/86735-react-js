@@ -6,7 +6,7 @@ const SinProductos = () => {
             <div className="row">
                 <div className="col text-center">
                     <h1>No se encontraron Productos en el Carrito!</h1>
-                    <Link to={"/"} className="btn btn-warning fw-bold my-2">Ir a la Página Principal</Link>
+                    <Link to={"/"} className="btn btn-warning fw-bold my-3">Ir a la Página Principal</Link>
                 </div>
             </div>
         </div>
